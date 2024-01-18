@@ -1,0 +1,76 @@
+Vs code
+
+1) Create MVC core Project : dotnet new mvc -o projetName
+
+2) Add Entity Framework in the project  using :  dotnet add package Microsoft.EntityFrameworkCore   &		
+						 dotnet add package Microsoft.EntityFrameworkCore.Tools &
+						 dotnet add package Pomelo.EntityFrameworkCore.MySql -v 8.0.0-beta.2
+
+3)Create Entity class (like emplyee, project) in model layer
+
+4)Add a new file named ProjectNameContext.cs to the Model folder and extend it by DbContext
+	a)Create DbSet objects of Entities and 
+	
+
+	b)Create constructor;
+.3
+	public EmployeeDbContext(DbContextOptions<EmployeeDbContext> options ):base(options){
+        
+        }
+ 
+	c)Then we have to create the connection string in our project. Connection string is used to represent all the credentials to connect with database. 
+	  sensitive data we are put it in our “appsettings.json” file.
+	
+	"ConnectionStrings": {
+	//Get following data from sql datbase
+   	 "conn":"Server=localhost;Database=dotnet3;User=root;Password=Inspiron3520;"
+ 	 }
+
+	d)Open Program.cs file and make following changes.
+	
+	var connstring=builder.Configuration.GetConnectionString("conn");
+	builder.Services.AddDbContext<EmployeeDbContext>(options=>{
+ 	options.UseMySql(connstring,ServerVersion.AutoDetect(connstring));
+	});
+
+
+	e)Override OnConfig Method   ((optional)->if above method dosen,t work then add this method)
+
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+        var connectionString =@"Server=localhost;Database=dotnet;User=root;Password=Inspiron3520;";
+        optionsBuilder.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString));
+        }
+
+
+	
+
+5)Create the database
+  The following steps use migrations to create a database
+	
+	dotnet tool install --global dotnet-ef
+	dotnet add package Microsoft.EntityFrameworkCore.Design
+	dotnet ef migrations add Initial
+	dotnet ef database update
+
+	(check this database if table is ceated or not)
+	if database is created then go to the following flow 
+
+6)Create Services folder
+  a)Create IServices Interface
+  b)Create Services class and Extend it by IServices Interface 
+
+7)Create Services folder
+  a)Create IReposetory Interface
+  b)Create Reposetory class and Extend it by IReposetor Interface
+  c)Inject Dependency of repository in Service Class
+
+8)Create Controller class in Controllers folder
+  a)Inject Dependency of Service in controller Class
+
+9) Create Singleton object in program.cs below builder declaration.
+	builder.Services.AddSingleton<IProductRepo,ProductRepo>();
+	builder.Services.AddSingleton<IProductService,ProductServices>();
+
+10)Create CRUD operation and view layer as per requirement.
+
