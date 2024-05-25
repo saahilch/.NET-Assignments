@@ -1,0 +1,92 @@
+
+MVC:
+	Layered Architecture
+
+	Data Layer		Back end ( Datawarehousing, Reporting, analytics, BI)
+	Repository Layer	Data Access Logic
+	Service	Layer		Core Business Logic
+	Controller Layer	Request processing
+				Response Generation
+	Model Layer 		Business Entity
+	Presentation Layer	View
+
+
+Web based Application:
+	Hosted on Web
+	Hoseted on Web Server
+	Web Application-------
+				ASP.NET mvc
+				Web UI
+					Server side Pages
+						.aspx	(Webforms)
+							Web controls(HTML)
+							user controls( UI components)
+						.cshtml (Razor Pages)
+							C# code + HTML 
+							Partial View
+			      Programmable Web UI
+
+			      +
+			      asp.net Web API
+			      Web Services ( Web API)
+					accessed via Web Protocols
+						HTTP, TCP, Messaging (MSMQ)
+						Online Communiction
+							Stateless communication--HTTP
+							Statefull communication--TCP
+						Ofline communiction
+							Reliable Communication MSMQ
+
+					REST API Services
+					GRPC Services
+					Kafka Services
+
+
+	Approach for Building Web Application
+			
+		Actors
+			BOD(5),staff(30), Libraian(89), Sales team(20), customer(10000), 			visitor(infinite)
+		Roles:
+			Director role,
+			Staff role, Sales Role, customer Role
+		Operations
+			  Show Book Gallery
+			  Show Book Details
+			  Request available book for reading
+			  Show status of book availablity
+			  Update 
+			  Insert
+			  Remove
+
+		
+		Business entities
+				Books
+				Customers
+				allocations
+
+
+		Controllers:
+			    BooksController
+			    CustomesController
+			    ReservationController
+			    OrdersController
+		Controller Actions:
+				BooksControllers
+					GET Request Action  Index------------------------------View
+					GET Request Action Details   id-----------------------
+					POST Request action new book
+					PUT Request action updating exsting book
+					DELETE
+
+					
+				
+
+
+
+
+
+
+
+
+
+	
